@@ -29,7 +29,7 @@ async function start() {
       };
       await producer.send({
         topic: 'document-event',
-        messages: [{ value: JSON.stringify(event) }]
+        messages: [{ key: value.documentId, value: JSON.stringify(event) }]
       });
 
       console.log('Published event:', event);
