@@ -32,10 +32,11 @@ test('Kafka document send workflow', async () => {
 
     await test.step('Get messages from document.send-event', async () => {
         let record: any = undefined;
-        const timeout = Date.now() + 2000;
+        const timeout = Date.now() + 5000;
 
         while (Date.now() < timeout && !record) {
             const records: any = await read(TOPIC_EVENT, 0, startOffset);
+            console.log(records)
             record = records.find(x => x.value.documentId === documentId);
             if (record) {
                 break    

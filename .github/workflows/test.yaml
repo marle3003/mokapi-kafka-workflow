@@ -19,7 +19,7 @@ jobs:
 
       - name: Start Mokapi
         run: |
-          docker run -d --rm --name mokapi -p 8080:8080 -p 9092:9092 -v ${{ github.workspace }}/mocks:/mocks mokapi/mokapi:latest /mocks
+          docker run -d --rm --name mokapi -p 8080:8080 -p 9092:9092 -v ${{ github.workspace }}/mocks:/mocks mokapi/mokapi:alpha /mocks
 
       - name: Set Up Node.js
         uses: actions/setup-node@v4
