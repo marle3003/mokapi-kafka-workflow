@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test';
 import fetch from 'node-fetch';
 
 const MOKAPI_API = 'http://localhost:8080/api/services/kafka/Kafka%20Mock';
-const TOPIC_COMMAND = 'document-command';
-const TOPIC_EVENT = 'document-event';
+const TOPIC_COMMAND = 'document.send-command';
+const TOPIC_EVENT = 'document.send-event';
 
 test('Kafka document send workflow', async () => {
     const documentId = 'doc-' + Date.now();
@@ -15,7 +15,7 @@ test('Kafka document send workflow', async () => {
         console.log('current partition offset is: ' + startOffset)
     })
 
-    await test.step('Produce a message to document-command topic', async () => {
+    await test.step('Produce a message to document.send-command topic', async () => {
         await produce(TOPIC_COMMAND, {
             key: documentId,
             value: {

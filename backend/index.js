@@ -12,7 +12,7 @@ async function start() {
   await consumer.connect();
   await producer.connect();
 
-  await consumer.subscribe({ topic: 'document-command', fromBeginning: true });
+  await consumer.subscribe({ topic: 'document.send-command', fromBeginning: true });
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
@@ -28,7 +28,7 @@ async function start() {
         status: 'SENT'
       };
       await producer.send({
-        topic: 'document-event',
+        topic: 'document.send-event',
         messages: [{ key: value.documentId, value: JSON.stringify(event) }]
       });
 

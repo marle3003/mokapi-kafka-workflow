@@ -8,12 +8,12 @@ servers:
     protocol: kafka
 
 channels:
-  document-command:
+  document.send-command:
     description: Sending documents to customers
     messages:
       documentCommand:
         $ref: '#/components/messages/documentCommand'
-  document-event:
+  document.send-event:
     description: Events when sending documents
     messages:
       documentEvent:
@@ -23,15 +23,15 @@ operations:
   sendDocument:
     action: send
     channel:
-      $ref: '#/channels/document-command'
+      $ref: '#/channels/document.send-command'
   processDocumentCommand:
     action: receive
     channel:
-      $ref: '#/channels/document-command'
+      $ref: '#/channels/document.send-command'
   documentSendEvent:
     action: send
     channel:
-      $ref: '#/channels/document-event'
+      $ref: '#/channels/document.send-event'
 
         
 components:
