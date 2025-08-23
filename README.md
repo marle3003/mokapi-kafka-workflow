@@ -17,12 +17,7 @@ The workflow under test:
 2. The backend consumes the command, simulates sending a document, and publishes a response to the document.send-event topic.
 3. Playwright verifies the full flow through Mokapi’s mocked Kafka API.
 
-```flowchart LR
-    A[Playwright test] -->|produce document.send-command| M(Mokapi - Kafka Mock)
-    M --> B[Backend service]
-    B -->|publish document.send-event| M
-    A -->|consume document.send-event| M
-```
+<img src="kafka-workflow.png" />
 
 ## Getting Started
 
