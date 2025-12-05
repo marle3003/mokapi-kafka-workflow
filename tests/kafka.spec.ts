@@ -37,7 +37,7 @@ test('Kafka document send workflow', async () => {
         while (Date.now() < timeout && !record) {
             const records: any = await read(TOPIC_EVENT, 0, startOffset);
             console.log(records)
-            record = records.find(x => x.value.documentId === documentId);
+            record = records.find((x:any) => x.value.documentId === documentId);
             if (record) {
                 break    
             }
@@ -50,7 +50,7 @@ test('Kafka document send workflow', async () => {
     })
 })
 
-async function getPartitionOffset(topic, partition) {
+async function getPartitionOffset(topic: string, partition: number) {
   const res = await fetch(`${MOKAPI_API}/topics/${topic}/partitions/${partition}`);
   const data: any = await res.json();
   return data.offset
@@ -71,11 +71,15 @@ async function produce(topic: string, record: {key: string, value: any}) {
     });
     expect(res.status).toBe(200);
     const data: any = await res.json();
-    expect(data.offsets.every(x => !('error' in x))).toBe(true);
+    expect(data.offsets.every((x: any) => !('error' in x))).toBe(true);
 }
 
 async function read(topic: string, partition: number, offset: number) {
-    const res = await fetch(`${MOKAPI_API}/topics/${topic}/partitions/${partition}/offsets?offset=${offset}`)
+    const res = await fetch(`${MOKAPI_API}/topics/${topic}/partitions/${partition}/offsets?offset=${offset}`,
+        {
+            headers: { Accept: 'application/json' }
+        }
+    )
     expect(res.status).toBe(200);
     return await res.json()
 }
