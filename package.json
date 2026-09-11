@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@playwright/test": "^1.62.1",
+    "@playwright/test": "^1.63.0",
     "kafkajs": "^2.2.4",
     "node-fetch": "^3.3.2"
   }
